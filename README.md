@@ -2,11 +2,15 @@
 
 To run Frontend Server go to the client-task-manager directory, you can run: 
 
+### `npm install`
+
 ### `npm start`
 
 ### `npm run build`
 
 To run Backend Server go to the server-task-manager directory, you can run: 
+
+### `npm install`
 
 ### `npm run dev`
 
