@@ -1,0 +1,35 @@
+version: '3'
+services:
+  mysql-db:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root@123
+      MYSQL_DATABASE: test
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root@123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  node-backend:
+    build: ./server-task-manager
+    ports:
+      - "8080:8080" # Port 8080 is exposed to access the React app
+    environment:
+      - DATABASE_HOST=localhost
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=root@123
+      - DATABASE_NAME=test
+    depends_on:
+      - mysql-db
+
+  react-frontend:
+    build: ./client-task-manager
+    ports:
+      - "3000:80"  # Port 3000 is exposed to access the React app
+    depends_on:
+      - node-backend
+
+volumes:
+  mysql-data:
